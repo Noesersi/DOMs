@@ -2,53 +2,54 @@
 import "bootstrap";
 import "./style.css";
 
-window.onload = () => {
-  //write your code here
-  document.querySelector("#btn").addEventListener("click", () => {
-    document.querySelector("#excusa").innerHTML = generateExcuse();
-  });
-  console.log("Hello Rigo from the console!");
+let pronombres = ["el", "un"];
+let sustantivos = [
+  "perro",
+  "gato",
+  "cactus",
+  "tronco",
+  "alcantarilla",
+  "anillo"
+];
+let adjetivos = ["loco", "grasiento", "maloliente"];
+let extensiones = [".com", ".es", ".net"];
+
+const generadorDeDominios = () => {
+  let nombresDeDominio = [];
+
+  for (let i = 0; i < pronombres.length; i++) {
+    for (let j = 0; j < adjetivos.length; j++) {
+      for (let k = 0; k < sustantivos.length; k++) {
+        for (let l = 0; l < extensiones.length; l++) {
+          let nombreDeDominio =
+            pronombres[i] + adjetivos[j] + sustantivos[k] + extensiones[l];
+          nombresDeDominio.push(nombreDeDominio);
+        }
+      }
+    }
+  }
+
+  return nombresDeDominio;
 };
 
-let generateExcuse = () => {
-  let sujeto = [
-    "El gato",
-    "El vecino de arriba",
-    "Mi tia la coja",
-    "La tortuga"
-  ];
-  let accion = [
-    "se ha comido",
-    "ha escupido en",
-    "me ha robado",
-    "ha explotado encima de"
-  ];
-  let posession = [
-    "mis llaves",
-    "mi móvil",
-    "mis deberes",
-    "mi coche",
-    "mi ordenador"
-  ];
-  let donde = [
-    "en la calle",
-    "en el parque",
-    "en el consejo de ministros",
-    "en la farmacia"
-  ];
+const mostrarNombresDeDominio = () => {
+  const todosLosNombresDeDominio = generadorDeDominios();
+  let listaDeDominios = todosLosNombresDeDominio.join("<br>");
+  document.getElementById("generadorDeDominios").innerHTML = listaDeDominios;
+};
 
-  let sujetoIndex = Math.floor(Math.random() * sujeto.length);
-  let accionIndex = Math.floor(Math.random() * accion.length);
-  let posessionIndex = Math.floor(Math.random() * posession.length);
-  let dondeIndex = Math.floor(Math.random() * donde.length);
+window.onload = () => {
+  let generarBoton = document.getElementById("generar");
+  generarBoton.addEventListener("click", mostrarNombresDeDominio);
 
-  return (
-    sujeto[sujetoIndex] +
-    " " +
-    accion[accionIndex] +
-    " " +
-    posession[posessionIndex] +
-    " " +
-    donde[dondeIndex]
+  let eliminarBoton = document.getElementById("eliminar");
+  eliminarBoton.addEventListener(
+    "click",
+    () => {
+      document.getElementById("generadorDeDominios").innerHTML = "";
+    },
+    false
   );
+
+  mostrarNombresDeDominio();
 };
