@@ -43,13 +43,9 @@ window.onload = () => {
   generarBoton.addEventListener("click", mostrarNombresDeDominio);
 
   let eliminarBoton = document.getElementById("eliminar");
-  eliminarBoton.addEventListener(
-    "click",
-    () => {
-      document.getElementById("generadorDeDominios").innerHTML = "";
-    },
-    false
-  );
+  eliminarBoton.addEventListener("click", () => {
+    document.getElementById("generadorDeDominios").innerHTML = "";
+  });
 
   mostrarNombresDeDominio();
 };
